@@ -4,6 +4,7 @@ namespace Tests\Feature\Http\Controllers\Api\V1\Auth;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Tests\TestCase;
 
@@ -56,6 +57,24 @@ class RegisterControllerTest extends TestCase
             'name' => $requestData['name'],
             'email' => $requestData['email'],
         ]);
+    }
+
+    /**
+     * Ensure the user's password is properly hashed before being stored.
+     */
+    public function test_password_is_hashed_before_saving(): void
+    {
+        $requestData = $this->setValidRequestData();
+
+        $this->postJson($this->setRoute(), $requestData);
+
+        $user = User::where('email', $requestData['email'])->first();
+
+        $this->assertNotNull($user);
+
+        $this->assertNotEquals($requestData['password'], $user->password);
+
+        $this->assertTrue(Hash::check($requestData['password'], $user->password));
     }
 
     /**
