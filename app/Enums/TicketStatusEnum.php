@@ -1,7 +1,5 @@
 <?php
-/**
- * @author m4ry4md
- */
+
 namespace App\Enums;
 
 use App\Traits\EnumTrait;

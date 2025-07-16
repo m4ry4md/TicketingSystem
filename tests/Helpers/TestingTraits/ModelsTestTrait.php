@@ -222,4 +222,21 @@ trait ModelsTestTrait
             $this->assertInstanceOf($relatedModel, $relatedItem, "{$relationshipMethod} contains an item that is not an instance of {$relatedModel}.");
         }
     }
+
+    /**
+     * Assert that the model's route key name is set to a specific value.
+     *
+     * @param string $expectedKeyName The expected route key name.
+     * @return void
+     */
+    public function assertRouteKeyNameIs(string $expectedKeyName): void
+    {
+        $model = new ($this->model())();
+
+        $this->assertEquals(
+            $expectedKeyName,
+            $model->getRouteKeyName(),
+            "The route key name is not set to '{$expectedKeyName}'."
+        );
+    }
 }

@@ -8,8 +8,6 @@ namespace App\Traits;
  * This trait allows for easy retrieval of enum names, values,
  * or a combined associative array, provides a convenient way to
  * validate enum values, and requires enums to define a human-readable label.
- *
- * @author m4ry4md
  */
 trait EnumTrait
 {
@@ -46,7 +44,7 @@ trait EnumTrait
     /**
      * Check if the given value is a valid enum case value.
      *
-     * @param  string|int  $value The value to check.
+     * @param string|int $value The value to check.
      * @return bool True if the value is valid, false otherwise.
      */
     public static function isValidValue($value): bool
