@@ -8,6 +8,8 @@ Route::prefix('v1')->as('api.v1.auth.')
     ->middleware('apiGuest')
     ->group(function () {
 
-    Route::post('/register', [\App\Http\Controllers\Api\V1\Auth\RegisterController::class, 'register'])->name('register');
+    Route::post('/register', [\App\Http\Controllers\Api\V1\Auth\RegisterController::class, 'register'])
+        ->middleware(['throttle:register'])
+        ->name('register');
 
 });

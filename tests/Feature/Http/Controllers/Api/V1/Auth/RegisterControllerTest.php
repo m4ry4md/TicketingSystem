@@ -91,6 +91,38 @@ class RegisterControllerTest extends TestCase
     }
 
     /**
+     * Ensure the registration endpoint is rate-limited.
+     */
+    public function test_rate_limiter_for_register_is_applied(): void
+    {
+        $requestData = $this->setValidRequestData();
+        $testIp = '127.0.0.1';
+
+        // Send 10 successful requests from the same IP
+        for ($i = 0; $i < 10; $i++) {
+            $requestData['email'] = "maryam{$i}@test.com";
+            $this->withServerVariables(['REMOTE_ADDR' => $testIp])
+                ->postJson($this->setRoute(), $requestData)
+                ->assertStatus(200);
+        }
+
+        // The 11th request from the same IP should be blocked
+        $requestData['email'] = 'maryam10@test.com';
+        $this->withServerVariables(['REMOTE_ADDR' => $testIp])
+            ->postJson($this->setRoute(), $requestData)
+            ->assertStatus(429)
+            ->assertSee(__('limiter.to_many_attempts'));
+
+        // Travel 1 minute into the future
+        $this->travel(1)->minutes();
+
+        // The next request should be allowed again
+        $requestData['email'] = 'maryam11@test.com';
+        $this->withServerVariables(['REMOTE_ADDR' => $testIp])
+            ->postJson($this->setRoute(), $requestData)
+            ->assertStatus(200);
+    }
+    /**
      * The name field must be present in the request.
      */
     public function test_name_field_is_required(): void
