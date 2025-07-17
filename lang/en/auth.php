@@ -20,5 +20,6 @@ return [
     'already_logged_in' => 'You are already logged in.',
     'login_successful' => 'User successfully logged in.',
     'logged_out_successfully' => 'User successfully logged out.',
+    "unauthorized_access" => "You do not have the necessary permissions to view this page."
 
 ];
