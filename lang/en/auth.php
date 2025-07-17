@@ -19,5 +19,6 @@ return [
     'user_registered' => 'User registered successfully.',
     'already_logged_in' => 'You are already logged in.',
     'login_successful' => 'User successfully logged in.',
+    'logged_out_successfully' => 'User successfully logged out.',
 
 ];
