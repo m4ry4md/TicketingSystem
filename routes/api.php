@@ -12,4 +12,8 @@ Route::prefix('v1')->as('api.v1.auth.')
         ->middleware(['throttle:register'])
         ->name('register');
 
+    Route::post('/login', [\App\Http\Controllers\Api\V1\Auth\LoginController::class, 'login'])
+        ->middleware(['throttle:login','throttle:login_with_same_email'])
+        ->name('login');
+
 });

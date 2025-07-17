@@ -26,6 +26,7 @@ class AppServiceProvider extends ServiceProvider
         Relation::morphMap([
             'replies' => 'App\Models\Reply',
             'tickets' => 'App\Models\Ticket',
+            'user' => 'App\Models\User',
         ]);
 
         RateLimiter::for('api', function (Request $request) {
@@ -34,6 +35,19 @@ class AppServiceProvider extends ServiceProvider
 
         RateLimiter::for('register', function (Request $request) {
             return Limit::perMinute(10)->by($request->ip())
+                ->response(function (Request $request, array $headers) {
+                    return response(__('limiter.to_many_attempts'), 429, $headers);
+                });
+        });
+        RateLimiter::for('login', function (Request $request) {
+            return Limit::perMinute(10)->by($request->ip())
+                ->response(function (Request $request, array $headers) {
+                    return response(__('limiter.to_many_attempts'), 429, $headers);
+                });
+        });
+
+        RateLimiter::for('login_with_same_email', function (Request $request) {
+            return Limit::perMinute(3)->by($request->get('email'))
                 ->response(function (Request $request, array $headers) {
                     return response(__('limiter.to_many_attempts'), 429, $headers);
                 });

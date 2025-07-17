@@ -18,5 +18,6 @@ return [
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
     'user_registered' => 'User registered successfully.',
     'already_logged_in' => 'You are already logged in.',
+    'login_successful' => 'User successfully logged in.',
 
 ];
