@@ -20,12 +20,11 @@ return Application::configure(basePath: dirname(__DIR__))
                 ->prefix('api/auth')
                 ->group(base_path('routes/auth.php'));
 
-            Route::middleware(['api', 'auth:sanctum', 'isAdmin', 'abilities:admin-panel:view'])
+            Route::middleware(['api', 'throttle:60,1','auth:sanctum', 'isAdmin', 'abilities:admin-panel:view'])
                 ->prefix('api/admin')
                 ->group(base_path('routes/admin.php'));
 
-            Route::middleware(['api', 'auth:sanctum'])
-                ->group(base_path('routes/api.php'));
+
         },
     )
     ->withMiddleware(function (Middleware $middleware): void {
