@@ -52,6 +52,12 @@ class AppServiceProvider extends ServiceProvider
                     return response(__('limiter.to_many_attempts'), 429, $headers);
                 });
         });
+        RateLimiter::for('user_send_ticket', function (Request $request) {
+            return Limit::perMinute(3)->by($request->user()?->id)
+                ->response(function (Request $request, array $headers) {
+                    return response(__('limiter.to_many_tickets_submitted'), 429, $headers);
+                });
+        });
 
     }
 
