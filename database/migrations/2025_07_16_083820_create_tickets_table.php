@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('title');
             $table->text('message');
             $table->string('status',20)->default(TicketStatusEnum::OPEN->value);
+            $table->string('sender_type');
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('user_id')->references('id')->on('users');

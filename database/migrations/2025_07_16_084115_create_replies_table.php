@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('ticket_id');
             $table->unsignedBigInteger('user_id');
             $table->text('message');
+            $table->string('sender_type');
             $table->softDeletes();
             $table->index('user_id');
             $table->index('ticket_id');

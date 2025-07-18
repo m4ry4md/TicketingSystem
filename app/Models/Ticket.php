@@ -2,13 +2,15 @@
 
 namespace App\Models;
 
+use App\Casts\Uuid;
+use App\Enums\SenderTypeEnum;
 use App\Enums\TicketStatusEnum;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Str;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
@@ -20,7 +22,7 @@ use Spatie\MediaLibrary\InteractsWithMedia;
  */
 class Ticket extends Model implements HasMedia
 {
-    use HasFactory, SoftDeletes, InteractsWithMedia;
+    use HasFactory, SoftDeletes, InteractsWithMedia, HasUuids;
 
     /**
      * The attributes that are mass assignable.
@@ -33,6 +35,7 @@ class Ticket extends Model implements HasMedia
         'title',
         'message',
         'status',
+        'sender_type',
     ];
 
     /**
@@ -45,25 +48,27 @@ class Ticket extends Model implements HasMedia
      */
     protected $casts = [
         'status' => TicketStatusEnum::class,
+        'sender_type' => SenderTypeEnum::class,
+        'uuid' => Uuid::class,
     ];
 
     /**
-     * The "booted" method of the model.
+     * Get the columns that should receive a unique identifier.
      *
-     * This method is called when the model is booting, and we use it
-     * to automatically generate a UUID for new tickets.
-     *
-     * @return void
+     * @return array
      */
-    protected static function boot(): void
+    public function uniqueIds(): array
     {
-        parent::boot();
+        return ['uuid'];
+    }
 
-        static::creating(function ($ticket) {
-            if (empty($ticket->uuid)) {
-                $ticket->uuid = (string) Str::uuid();
-            }
-        });
+
+    /**
+     * Register the media collections for the model.
+     */
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('attachments');
     }
 
     /**

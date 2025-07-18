@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\SenderTypeEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -11,13 +12,26 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Reply extends Model implements HasMedia
 {
-    use HasFactory, InteractsWithMedia,SoftDeletes;
+    use HasFactory, InteractsWithMedia, SoftDeletes;
 
     protected $fillable = [
         'ticket_id',
         'user_id',
         'message',
+        'sender_type',
     ];
+
+    protected $casts = [
+        'sender_type' => SenderTypeEnum::class
+    ];
+
+    /**
+     * Register the media collections for the model.
+     */
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('attachments');
+    }
 
     /**
      * A reply belongs to a ticket.
