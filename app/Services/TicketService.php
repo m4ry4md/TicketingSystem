@@ -14,6 +14,7 @@ use App\Notifications\AdminReplied;
 use Illuminate\Contracts\Validation\Factory as ValidatorFactory;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 use Throwable;
@@ -26,12 +27,22 @@ class TicketService
 
     public function getTicketsForUser(User $user): LengthAwarePaginator
     {
-        return $user->tickets()->latest()->paginate();
+        $cacheKey = "tickets:user:{$user->id}";
+        $cacheDuration = now()->addMinutes(60); // Cache for 60 minutes
+
+        return Cache::remember($cacheKey, $cacheDuration, function () use ($user) {
+            return $user->tickets()->latest()->paginate();
+        });
     }
 
     public function getAllTickets(): LengthAwarePaginator
     {
-        return Ticket::latest()->paginate();
+        $cacheKey = 'tickets:all';
+        $cacheDuration = now()->addMinutes(60); // Cache for 60 minutes
+
+        return Cache::remember($cacheKey, $cacheDuration, function () {
+            return Ticket::latest()->paginate();
+        });
     }
 
     /**
@@ -126,7 +137,6 @@ class TicketService
             } else {
                 $ticket->save();
             }
-
 
             broadcast(new TicketReplied($ticket, $reply))->toOthers();
 

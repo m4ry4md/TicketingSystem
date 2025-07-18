@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Casts\Uuid;
 use App\Enums\SenderTypeEnum;
 use App\Enums\TicketStatusEnum;
+use App\Observers\TicketObserver;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -20,6 +21,8 @@ use Spatie\MediaLibrary\InteractsWithMedia;
  * A ticket is created by a user and can have multiple replies.
  * It also supports file attachments through Spatie MediaLibrary.
  */
+
+#[ObservedBy([TicketObserver::class])]
 class Ticket extends Model implements HasMedia
 {
     use HasFactory, SoftDeletes, InteractsWithMedia, HasUuids;
