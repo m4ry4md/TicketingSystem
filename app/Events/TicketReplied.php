@@ -12,7 +12,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class TicketReplied
+class TicketReplied implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -33,5 +33,13 @@ class TicketReplied
         return [
             new PrivateChannel('tickets.' . $this->ticket->id),
         ];
+    }
+
+    /**
+     * Specify the broadcast name so that frontend listeners can target it easily.
+     */
+    public function broadcastAs(): string
+    {
+        return 'App.Events.TicketReplied';
     }
 }

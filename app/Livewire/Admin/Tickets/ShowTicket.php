@@ -35,7 +35,13 @@ class ShowTicket extends Component
     {
         return [
             "echo-private:tickets.{$this->ticket->id},.App.Events.TicketReplied" => 'newReplyAdded',
+            'status-updated' => 'refreshTicket',
         ];
+    }
+
+    public function refreshTicket()
+    {
+        $this->ticket->refresh();
     }
 
     public function addReply(TicketService $ticketService)

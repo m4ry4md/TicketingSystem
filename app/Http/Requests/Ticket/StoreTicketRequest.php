@@ -24,7 +24,7 @@ class StoreTicketRequest extends FormRequest
         return [
             'title' => 'required|string|max:255',
             'message' => 'required|string|max:5000',
-            'attachment' => 'nullable|file|mimes:jpg,png,pdf,zip|max:5120', // 5MB max
+            'attachment' => 'nullable|file|mimes:jpg,jpeg,png,gif,pdf,zip|max:5120', // 5MB max
         ];
     }
 }

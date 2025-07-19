@@ -21,7 +21,7 @@
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                         {{-- We'll use a badge or similar for status later --}}
-                        {{ $ticket->status->name }}
+                        {{ $ticket->status->label() }}
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                         {{ $ticket->updated_at->diffForHumans() }}

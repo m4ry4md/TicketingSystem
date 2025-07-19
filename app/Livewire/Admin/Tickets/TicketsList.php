@@ -14,7 +14,8 @@ class TicketsList extends Component
     {
         return [
             // This listener is now correctly set up
-            "echo-private:admin,TicketCreated" => 'refreshList',
+          //  "echo-private:admin,TicketCreated" => 'refreshList',
+            "echo-private:admin,.TicketCreated" => 'refreshList',
         ];
     }
 
