@@ -1,61 +1,89 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Laravel Ticketing System
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Key Features
 
-## About Laravel
+- **Complete Ticketing System**: Create, view, reply to, and manage the status of tickets.
+- **Authentication**: Secure registration, login, and logout system for users and admins via both API (Sanctum) and web.
+- **Roles & Permissions**: Utilizes the `spatie/laravel-permission` package to manage user roles (admin, support, regular user).
+- **File Attachments**: Ability to upload files for tickets and replies using `spatie/laravel-medialibrary`.
+- **Real-time Admin Panel**: The admin panel is built with **Livewire** and **Laravel Reverb**, allowing the ticket list and replies to update live without needing a page refresh.
+- **Notifications**: Sends email notifications to users when they receive a reply from the support team.
+- **Bilingual Support**: Provides language files for both Persian (fa) and English (en).
+- **Rate Limiting**: Implemented for enhanced security on sensitive routes like login and registration.
+- **Docker Support**: The project is fully containerized and can be easily run using **Laravel Sail**.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Installation and Setup Guide (via Docker)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-## Learning Laravel
+1.  **Prerequisites**:
+    -   Docker Desktop
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+2.  **Clone the Project and Initial Setup**:
+    ```bash
+    git clone https://github.com/m4ry4md/TicketingSystem.git
+    cd <project-directory>
+    cp .env.example .env
+    ```
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+3.  **Run Sail**:
+    Execute the following command to build and run the Docker containers.
+    ```bash
+    ./vendor/bin/sail up -d
+    ```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+4.  **Install Dependencies and Initial Setup**:
+    Run the following commands to install packages, run migrations, and seed data inside the container.
+    ```bash
+    ./vendor/bin/sail composer install
+    ./vendor/bin/sail artisan key:generate
+    ./vendor/bin/sail artisan migrate --seed
+    ./vendor/bin/sail artisan storage:link
+    ./vendor/bin/sail npm install
+    ./vendor/bin/sail npm run dev
+    ```
 
-## Laravel Sponsors
+The project is now accessible at `http://localhost`.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## Key Packages Used
 
-### Premium Partners
+### Backend (Composer)
+- **`laravel/framework`**:
+- **`livewire/livewire`**:
+- **`laravel/sanctum`**:
+- **`laravel/reverb`**:
+- **`spatie/laravel-permission`**:
+- **`spatie/laravel-medialibrary`**:
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+### Frontend (NPM)
+- **`tailwindcss`**:
+- **`vite`**:
+- **`alpinejs`**:
+- **`axios`**:
 
-## Contributing
+---
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## Important Artisan Commands
 
-## Code of Conduct
+-   `php artisan migrate --seed`: Runs database migrations and seeds initial data.
+-   `php artisan reverb:start`: Starts the WebSocket server.
+-   `php artisan queue:work`: Starts the queue worker.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## Default Credentials
 
-## Security Vulnerabilities
+The following users are created in the system by the seeders:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+-   **Super Admin:**
+    -   **Email**: `super_admin@example.com`
+    -   **Password**: `maryam123456`
 
-## License
+-   **Support User:**
+    -   **Email**: `support@example.com`
+    -   **Password**: `maryam123456`
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+-   **Regular Users:**
+    -   **Email**: `user1@example.com`, `user2@example.com`, `user3@example.com`
+    -   **Password**: `password`
+
+---
