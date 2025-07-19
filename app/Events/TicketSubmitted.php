@@ -5,10 +5,11 @@ namespace App\Events;
 use App\Models\Ticket;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PrivateChannel;
+use Illuminate\Contracts\Broadcasting\ShouldBroadcast; // Add this line
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class TicketSubmitted
+class TicketSubmitted implements ShouldBroadcast // Implement the interface
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 

@@ -13,7 +13,7 @@ class TicketPolicy
      */
     public function before(User $user, string $ability): bool|null
     {
-        if ($user->hasRole('super_admin', 'api')) {
+        if ($user->hasRole('super_admin')) {
             return true;
         }
 

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api\V1\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\V1\Auth\RegisterRequest;
+use App\Http\Requests\Auth\RegisterRequest;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Hash;
@@ -21,7 +21,7 @@ class RegisterController extends Controller
      * Validates the incoming request data using RegisterRequest, creates a new user
      * with the provided credentials, and returns a success message upon completion.
      *
-     * @param  \App\Http\Requests\V1\Auth\RegisterRequest  $request The request object containing validated user data.
+     * @param  \App\Http\Requests\Auth\RegisterRequest  $request The request object containing validated user data.
      * @return \Illuminate\Http\JsonResponse A JSON response indicating successful registration.
      */
     public function register(RegisterRequest $request): JsonResponse

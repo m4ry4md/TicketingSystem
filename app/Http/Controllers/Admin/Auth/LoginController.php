@@ -3,9 +3,8 @@
 namespace App\Http\Controllers\Admin\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\V1\Auth\LoginRequest;
+use App\Http\Requests\Auth\LoginRequest;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
@@ -17,7 +16,7 @@ class LoginController extends Controller
      * Validates the incoming request data, attempts to authenticate the user,
      * and if successful, generates and returns an API token using Sanctum.
      *
-     * @param \App\Http\Requests\V1\Auth\LoginRequest $request The request object containing validated user credentials.
+     * @param \App\Http\Requests\Auth\LoginRequest $request The request object containing validated user credentials.
      * @return \Illuminate\Http\JsonResponse A JSON response with the API token or an error message.
      */
     public function login(LoginRequest $request): JsonResponse

@@ -1,0 +1,51 @@
+<?php
+
+return [
+    'tickets' => 'Tickets',
+    'my_tickets' => 'My Tickets',
+    'all_tickets' => 'All Tickets',
+    'new_ticket' => 'New Ticket',
+    'ticket_created_successfully' => 'Ticket created successfully.',
+    'create_ticket' => 'Create Ticket',
+    'title' => 'Title',
+    'message' => 'Message',
+    'attachment' => 'Attachment (Optional)',
+    'submit_reply' => 'Submit Reply',
+    'status' => 'Status',
+    'last_update' => 'Last Update',
+    'user' => 'User',
+    'no_tickets_found' => 'No tickets found.',
+    'ticket_details' => 'Ticket Details',
+    'no_replies_found' => 'No replies found for this ticket yet.',
+    'your_message' => 'Your Message',
+    'write_your_reply_here' => 'Write your reply here...',
+    'change_ticket_status' => 'Change Ticket Status',
+    'logout' => 'Logout',
+    'profile' => 'Profile',
+    'dashboard' => 'Dashboard',
+    'ticket_status_changed_success' => 'Ticket status changed successfully.',
+    'update_status' => 'Update Status',
+
+
+    'notifications' => [
+        'new_reply' => [
+            'subject' => 'New reply for ticket: :ticket_title',
+            'greeting' => 'Hello :user_name,',
+            'line_1' => 'A new reply has been posted to your ticket by ":replier_name".',
+            'action' => 'View Ticket',
+            'line_2' => 'Thank you for using our system.',
+        ],
+    ],
+
+    'attachments' => 'Attachments',
+    'replies' => 'Replies',
+    'add_reply' => 'Add Reply',
+    'your_reply' => 'Your Reply',
+    'created_by' => 'Created by:',
+    'created_at' => 'Created at:',
+    'by' => 'By:',
+    'no_replies_yet' => 'No replies yet.',
+    'uploading' => 'Uploading...',
+    'add_reply_button' => 'Post Reply',
+    'sending' => 'Sending...',
+];

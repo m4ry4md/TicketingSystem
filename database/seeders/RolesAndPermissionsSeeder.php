@@ -18,7 +18,7 @@ class RolesAndPermissionsSeeder extends Seeder
         app()[PermissionRegistrar::class]->forgetCachedPermissions();
 
         // Define the guard name
-        $guardName = 'api';
+        $guardName = 'web';
 
         // Create Permissions for the 'api' guard
         $permissions = [

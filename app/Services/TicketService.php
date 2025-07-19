@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Enums\SenderTypeEnum;
 use App\Enums\TicketStatusEnum;
+use App\Events\TicketCreated;
 use App\Events\TicketReplied;
 use App\Events\TicketSubmitted;
 use App\Exceptions\InvalidTicketDataException;
@@ -23,6 +24,7 @@ class TicketService
 {
     public function __construct(protected ValidatorFactory $validatorFactory)
     {
+
     }
 
     public function getTicketsForUser(User $user): LengthAwarePaginator
@@ -77,6 +79,7 @@ class TicketService
             }
 
             broadcast(new TicketSubmitted($ticket))->toOthers();
+            broadcast(new TicketCreated($ticket))->toOthers();
 
             return $ticket;
         });
@@ -125,6 +128,7 @@ class TicketService
                 'message' => $data['message'],
                 'sender_type' => $senderType,
             ]);
+
 
             if ($attachment) {
                 $reply->addMedia($attachment)->toMediaCollection('attachments');

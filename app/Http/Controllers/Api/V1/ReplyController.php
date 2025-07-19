@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\V1\Reply\StoreReplyRequest;
-use App\Http\Requests\V1\Reply\UpdateReplyRequest;
+use App\Http\Requests\Reply\StoreReplyRequest;
+use App\Http\Requests\Reply\UpdateReplyRequest;
 use App\Http\Resources\Api\V1\ReplyResource;
 use App\Models\Reply;
 use App\Models\Ticket;

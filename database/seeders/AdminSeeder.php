@@ -14,17 +14,19 @@ class AdminSeeder extends Seeder
      */
     public function run(): void
     {
-        $guardName = 'api';
+        $guardName = 'web';
 
         // 1. Create Super Admin User
-        $superAdmin = User::factory()->create([
+        $superAdmin = User::factory()->admin()->create([
             'name' => 'Super Admin User',
             'email' => 'super_admin@example.com',
             'password' => Hash::make('maryam123456'),
+
         ]);
 
         // Find the 'super_admin' role for the 'api' guard and assign it
         $superAdminRole = Role::where('name', 'super_admin')->where('guard_name', $guardName)->first();
+
         if ($superAdminRole) {
             $superAdmin->assignRole($superAdminRole);
         }

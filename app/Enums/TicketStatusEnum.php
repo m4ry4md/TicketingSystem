@@ -25,6 +25,6 @@ enum TicketStatusEnum: string
      */
     public function label(): string
     {
-        return __('enums.ticket_status.' . $this->value);
+        return __('enums/ticket_status.' . $this->value);
     }
 }

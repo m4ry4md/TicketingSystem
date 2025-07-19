@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'user'   => 'کاربر',
-    'admin'  => 'پشتیبانی',
-    'system' => 'سیستم',
+    'user'   => 'User',
+    'admin'  => 'Support',
+    'system' => 'System',
 ];
