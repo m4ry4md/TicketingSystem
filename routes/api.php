@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\V1\ReplyController;
 use App\Http\Controllers\Api\V1\TicketController;
 use App\Models\Ticket;
 use Illuminate\Support\Facades\Route;
@@ -16,6 +17,11 @@ Route::middleware(['api','auth:sanctum','throttle:60,1'])
     ->middlewareFor('show', ['can:view,ticket'])
     ->middlewareFor('update', ['can:update,ticket'])
             ->except(['destroy']);
+
+
+        Route::apiResource('tickets.replies', ReplyController::class)
+            ->except(['destroy'])
+            ->shallow();
 
 
     });
