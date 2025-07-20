@@ -69,6 +69,7 @@ The project is now accessible at `http://localhost/admin/login`.
 -   `php artisan migrate --seed`: Runs database migrations and seeds initial data.
 -   `php artisan reverb:start`: Starts the WebSocket server.
 -   `php artisan queue:work`: Starts the queue worker.
+-   php artisan test: Runs the application's feature and unit tests.
 
 ## Default Credentials
 
