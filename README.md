@@ -44,7 +44,7 @@
     ./vendor/bin/sail npm run dev
     ```
 
-The project is now accessible at `http://localhost`.
+The project is now accessible at `http://localhost/admin/login`.
 
 ## Key Packages Used
 
